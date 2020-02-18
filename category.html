@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <title>Document</title>
+    <style>
+        .main-category {
+            width: 500px;
+            margin: auto;
+        }
+
+        .main-category .row {
+            margin: 0;
+        }
+
+        .category-option .col-sm-6 {
+            font-size: 20px;
+            padding: 10px;
+            color: #004040;
+            border: 1px solid blue;
+        }
+
+        .category-search {
+            border: 1px solid blue;
+            /* padding: 20px; */
+        }
+
+        .category-search i.fa.fa-search {
+            /* padding: 10px; */
+            padding: 0 10px;
+            /* padding-left: 10px; */
+            font-size: 20px;
+        }
+
+        .category-search input[type="text"] {
+            display: inline-block;
+            /* margin: 0px; */
+            border: none;
+            padding: 10px 0;
+            width: 80%;
+            outline: none;
+            font-size: 20px;
+            color: black;
+        }
+
+        .menu-parent i.fa.fa-cutlery {
+            /* font-size: 36px; */
+            /* padding: 18px; */
+            font-size: 20px;
+            padding: 10px;
+            /* padding-left: 30px; */
+            background: blue;
+            border-radius: 50%;
+            color: white;
+            margin: 10px;
+            /* margin-left: 30px; */
+        }
+
+        .menu-parent span {
+            font-size: 20px;
+        }
+
+        .menu-parent {
+            display: flex;
+            align-items: center;
+            background-color: #eee;
+        }
+
+        .menu-child {
+            display: block;
+        }
+
+        .menu-child--item i.fa.fa-cutlery {
+            font-size: 20px;
+            padding: 10px;
+            /* padding-left: 30px; */
+            background: blue;
+            border-radius: 50%;
+            color: white;
+            margin: 10px;
+            margin-left: 30px;
+        }
+
+        .menu-child--item span {
+            font-size: 20px;
+        }
+
+        .menu-child--item {
+            display: flex;
+            align-items: center;
+
+        }
+
+        i.fa.fa-caret-up,
+        i.fa.fa-caret-down {
+            /* float: right; */
+            margin-left: auto;
+            margin-right: 10px;
+            font-size: 20px;
+            color: #655d5d;
+            /* display: inherit; */
+        }
+
+        i.fa.fa-plus {
+            font-size: 20px;
+        }
+
+        .category-content {
+            border: 1px solid green;
+            height: 360px;
+            overflow-y: auto;
+        }
+
+        .col-sm-6.active {
+            background: #2abdcc;
+            /* border: 3px solid; */
+            border-bottom: 3px solid blue;
+            padding-bottom: 8px;
+            transition: .4s;
+        }
+
+        #debt {
+            display: none;
+        }
+
+        /*   */
+    </style>
+</head>
+
+<body>
+
+
+    <div class="main-category">
+        <h2 id="category-usage"></h2>
+        <div class="category-option">
+            <div class="row text-center">
+                <div class="col-sm-6 active" onclick="changeOption(this, 'usage')">Chi tien</div>
+                <div class="col-sm-6" onclick="changeOption(this, 'debt')">Vay no</div>
+            </div>
+        </div>
+        <div id="usage" class="tabcontent">
+            <div class="category-search">
+                <i class="fa fa-search"></i>
+                <input type="text" placeholder="Tim kiem danh muc..." onkeyup="findCategory()" id="contentSearch" />
+                <i class="fa fa-plus "></i>
+            </div>
+            <div class="category-content">
+                <div class="menu-parent">
+                    <i class="fa fa-cutlery"></i>
+                    <span onclick="addCategory(this)">An uong</span>
+                    <i class="fa fa-caret-down" onclick="showCategoryChild(this)"></i>
+                </div>
+                <div class="menu-child">
+                    <div class="menu-child--item">
+                        <i class="fa fa-cutlery"></i>
+                        <span onclick="addCategory(this)">Di cho/ sieu thi</span>
+
+                    </div>
+                    <div class="menu-child--item">
+                        <i class="fa fa-cutlery"></i>
+                        <span onclick="addCategory(this)">An tiem</span>
+
+                    </div>
+                    <div class="menu-child--item">
+                        <i class="fa fa-cutlery"></i>
+                        <span onclick="addCategory(this)">Cafe</span>
+
+                    </div>
+                </div>
+                <div class="menu-parent">
+                    <i class="fa fa-cutlery"></i>
+                    <span onclick="addCategory(this)">Dich vu sinh hoat</span>
+                    <i class="fa fa-caret-down" onclick="showCategoryChild(this)"></i>
+                </div>
+                <div class="menu-child">
+                    <div class="menu-child--item">
+                        <i class="fa fa-cutlery"></i>
+                        <span onclick="addCategory(this)">Dien</span>
+
+                    </div>
+                    <div class="menu-child--item">
+                        <i class="fa fa-cutlery"></i>
+                        <span onclick="addCategory(this)">Nuoc</span>
+
+                    </div>
+                    <div class="menu-child--item">
+                        <i class="fa fa-cutlery"></i>
+                        <span onclick="addCategory(this)">Internet</span>
+
+                    </div>
+                </div>
+                <div class="menu-parent">
+                    <i class="fa fa-cutlery"></i>
+                    <span onclick="addCategory(this)">Di lai</span>
+                    <i class="fa fa-caret-down" onclick="showCategoryChild(this)"></i>
+                </div>
+                <div class="menu-child">
+                    <div class="menu-child--item">
+                        <i class="fa fa-cutlery"></i>
+                        <span onclick="addCategory(this)">Xang xe</span>
+
+                    </div>
+                    <div class="menu-child--item">
+                        <i class="fa fa-cutlery"></i>
+                        <span onclick="addCategory(this)">Bao hiem xe</span>
+
+                    </div>
+                    <div class="menu-child--item">
+                        <i class="fa fa-cutlery"></i>
+                        <span onclick="addCategory(this)">Gui xe</span>
+
+                    </div>
+                </div>
+                <div class="menu-parent">
+                    <i class="fa fa-cutlery"></i>
+                    <span onclick="addCategory(this)">Dich vu sinh hoat</span>
+                    <i class="fa fa-caret-down" onclick="showCategoryChild(this)"></i>
+                </div>
+                <div class="menu-child">
+                    <div class="menu-child--item">
+                        <i class="fa fa-cutlery"></i>
+                        <span onclick="addCategory(this)">Dien</span>
+
+                    </div>
+                    <div class="menu-child--item">
+                        <i class="fa fa-cutlery"></i>
+                        <span onclick="addCategory(this)">Nuoc</span>
+
+                    </div>
+                    <div class="menu-child--item">
+                        <i class="fa fa-cutlery"></i>
+                        <span onclick="addCategory(this)">Internet</span>
+
+                    </div>
+                </div>
+
+                <div class="menu-parent">
+                    <i class="fa fa-cutlery"></i>
+                    <span onclick="addCategory(this)">Dich vu sinh hoat</span>
+                    <i class="fa fa-caret-down" onclick="showCategoryChild(this)"></i>
+                </div>
+                <div class="menu-child">
+                    <div class="menu-child--item">
+                        <i class="fa fa-cutlery"></i>
+                        <span onclick="addCategory(this)">Dien</span>
+
+                    </div>
+                    <div class="menu-child--item">
+                        <i class="fa fa-cutlery"></i>
+                        <span onclick="addCategory(this)">Nuoc</span>
+
+                    </div>
+                    <div class="menu-child--item">
+                        <i class="fa fa-cutlery"></i>
+                        <span onclick="addCategory(this)">Internet</span>
+
+                    </div>
+                </div>
+
+
+                <div class="menu-parent">
+                    <i class="fa fa-cutlery"></i>
+                    <span onclick="addCategory(this)">Dich vu sinh hoat</span>
+                    <i class="fa fa-caret-down" onclick="showCategoryChild(this)"></i>
+                </div>
+                <div class="menu-child">
+                    <div class="menu-child--item">
+                        <i class="fa fa-cutlery"></i>
+                        <span onclick="addCategory(this)">Dien</span>
+
+                    </div>
+                    <div class="menu-child--item">
+                        <i class="fa fa-cutlery"></i>
+                        <span onclick="addCategory(this)">Nuoc</span>
+
+                    </div>
+                    <div class="menu-child--item">
+                        <i class="fa fa-cutlery"></i>
+                        <span onclick="addCategory(this)">Internet</span>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="debt" class="tabcontent">
+            <div class="category-content">
+                <div class="menu-parent">
+                    <i class="fa fa-cutlery"></i>
+                    <span onclick="addCategory(this)">Cho vay</span>
+                </div>
+                <div class="menu-parent">
+                    <i class="fa fa-cutlery"></i>
+                    <span onclick="addCategory(this)">Tra no</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function addCategory(ele) {
+            document.getElementById("category-usage").innerHTML = ele.innerHTML;
+        }
+
+        function showCategoryChild(ele) {
+            console.log(ele);
+            var elem = ele.parentElement.nextElementSibling;
+            console.log(elem.className);
+            console.log(elem.scrollHeight);
+            if (ele.classList.contains("fa-caret-down")) {
+                // elem.style.maxHeight = null;
+                elem.style.display = "none";
+            } else {
+                // elem.style.maxHeight = elem.scrollHeight + 'px';
+                elem.style.display = "flex";
+                elem.style.flexFlow = "column";
+            }
+
+            if (ele.classList.contains("fa-caret-down")) {
+                ele.classList.remove("fa-caret-down");
+                ele.classList.add("fa-caret-up");
+            } else {
+                ele.classList.remove("fa-caret-up");
+                ele.classList.add("fa-caret-down");
+            }
+        }
+
+        function findCategory() {
+            var categoryNames = document.querySelectorAll("#usage div.category-content div.menu-parent span");
+            var srct = document.getElementById("contentSearch").value;
+            var categoryItemNames = document.querySelectorAll("#usage div.category-content div.menu-child span");
+        
+            categoryNames.forEach(element => {
+                var content = element.innerHTML;
+                if (srct === "") {
+                    // element.parentElement.style.visibility = "visible";
+                } else {
+                    if (content.indexOf(srct) === -1) {
+                        var count = 0
+                        var menuChilds = element.parentElement.nextElementSibling.querySelectorAll("span");
+                        console.log(menuChilds);
+                        menuChilds.forEach(elem => {
+                            if (elem.innerHTML.indexOf(srct) === -1) {
+                                elem.parentElement.style.display = "none";
+                            } else {
+                                count++;
+                            }
+                        })
+
+                        if (count === 0) {
+                            element.parentElement.style.display = "none";
+                        }
+                            
+                        
+                    } 
+                    
+                }
+            })
+
+            // console.log(categoryNames);
+        }
+
+        function changeOption(ele, optionName) {
+            var option = document.querySelectorAll(".category-option .col-sm-6");
+            option.forEach(element => {
+                element.classList.remove("active");
+            })
+
+            ele.classList.add("active");
+
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+
+            // Get all elements with class="tablinks" and remove the class "active"
+
+
+            // Show the current tab, and add an "active" class to the button that opened the tab
+            document.getElementById(optionName).style.display = "block";
+
+        }
+    </script>
+</body>
+
+</html>
